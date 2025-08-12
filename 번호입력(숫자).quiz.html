@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>번호 버튼 퀴즈</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+  #inputBox {
+    font-size: 24px; 
+    width: 320px; 
+    height: 40px; 
+    text-align: center; 
+    margin-bottom: 15px;
+  }
+  .num-button {
+    width: 60px; height: 60px; 
+    font-size: 24px; 
+    margin: 5px; 
+    cursor: pointer;
+  }
+  #message { margin-top: 20px; font-weight: bold; }
+  #message.wrong { color: red; }
+  #video { margin-top: 20px; display: none; }
+  #btnClear {
+    width: 130px; 
+    height: 40px; 
+    font-size: 18px; 
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  #btnCheck {
+    width: 130px; 
+    height: 40px; 
+    font-size: 18px; 
+    margin-top: 10px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h2>번호를 눌러 입력하세요</h2>
+<input type="text" id="inputBox" readonly placeholder="여기에 번호가 표시됩니다" />
+
+<br/>
+<div id="buttons">
+  <button class="num-button" onclick="addNumber('1')">1</button>
+  <button class="num-button" onclick="addNumber('2')">2</button>
+  <button class="num-button" onclick="addNumber('0')">0</button>
+  <button class="num-button" onclick="addNumber('6')">6</button>
+  <button class="num-button" onclick="addNumber('5')">5</button>
+  <button class="num-button" onclick="addNumber('3')">3</button>
+  <button class="num-button" onclick="addNumber('2')">2</button>
+  <button class="num-button" onclick="addNumber('0')">0</button>
+  <button class="num-button" onclick="addNumber('5')">5</button>
+  <button class="num-button" onclick="addNumber('3')">3</button>
+  <br/>
+  <button id="btnClear" onclick="clearInput()">지우기</button>
+  <button id="btnCheck" onclick="checkAnswer()">확인</button>
+</div>
+
+<div id="message"></div>
+
+<div id="video">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/s4Vgl4K6TOE" 
+  title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<script>
+  const inputBox = document.getElementById('inputBox');
+  const message = document.getElementById('message');
+  const video = document.getElementById('video');
+  const correctAnswer = '1206520533';
+
+  function addNumber(num) {
+    if (inputBox.value.length < 11) {
+      inputBox.value += num;
+    }
+  }
+
+  function clearInput() {
+    inputBox.value = '';
+    message.textContent = '';
+    message.className = '';
+    video.style.display = 'none';
+  }
+
+  function checkAnswer() {
+    if (inputBox.value === correctAnswer) {
+      message.textContent = '정답입니다! 아래 영상을 확인하세요.';
+      message.className = '';
+      video.style.display = 'block';
+    } else {
+      message.textContent = '틀렸습니다. 다시 시도하세요.';
+      message.className = 'wrong';
+      video.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>
